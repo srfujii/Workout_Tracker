@@ -5,7 +5,6 @@ const { Workout, Exercise } = require('../../models');
 
 // Get all workouts
 router.get('/', async (req, res) => {
-    
 try {
     const workouts = await Workout.find();
     // .populate("exercises");
@@ -13,12 +12,10 @@ try {
 } catch (err) {
     res.json(err);
 }
-    
 });
 
 // Get all workouts in a range
 router.get('/range', async (req, res) => {
-    
 try {
     const workouts = await Workout.aggregate([
         { $addFields: {
@@ -33,12 +30,11 @@ try {
 } catch (err) {
     res.json(err);
 }
-    
 });
+
 
 // Create new workout
 router.post('/', async ({ body }, res) => {
-    
 try {
     const workouts = await Workout.create({ body });
     // .populate("exercises");
@@ -46,22 +42,18 @@ try {
 } catch (err) {
     res.json(err);
 }
-    
 });
 
-// Update a workout
-router.put('/:id', async (req, res) => {
-   
+
+// Add exercise to workout
+router.put('/:id', async ({body}, res) => {
 try {
-    const result = await Workout.update(
-        { _id: req.params.id }, 
-        { $push: { exercises: req.body } }
-    );
+    const exercise = await Exercise.create(body);
+    const result = await Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true });
     res.json(result);
 } catch (err) {
     res.json(err);
-}
-
+}  
 });
 
 module.exports = router;
