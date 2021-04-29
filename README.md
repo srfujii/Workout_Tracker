@@ -50,7 +50,7 @@
 
   ## Screenshots
 
-  ![Screenshot](./public/img/image1.png)
+  ![Screenshot](./public/img/image01.png)
   ![Screenshot](./public/img/image2.png)
   ![Screenshot](./public/img/image3.png)
 
